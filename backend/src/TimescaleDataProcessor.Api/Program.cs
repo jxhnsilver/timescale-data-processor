@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
+using System.Reflection;
 using TimescaleDataProcessor.Api.Data.Context;
 using TimescaleDataProcessor.Api.Parsers;
 using TimescaleDataProcessor.Api.Services;
@@ -19,9 +21,37 @@ builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 builder.Services.AddScoped<IResultsService, ResultsService>();
 builder.Services.AddScoped<IValuesService, ValuesService>();
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "TimescaleDataProcessor",
+        Version = "v1",
+        Description = "API для работы с timescale данными и результатами обработки данных. " +
+            "Обеспечивает импорт файлов с валидацией бизнес-требований и расчётом интегральных результатов по всему набору данных, " +
+            "а также предоставляет инструменты для анализа накопленных метрик."
+    });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    options.IncludeXmlComments(xmlPath);
+
+    options.DescribeAllParametersInCamelCase();
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "TimescaleDataProcessor v1");
+    });
+}
 
 app.MapControllers();
 

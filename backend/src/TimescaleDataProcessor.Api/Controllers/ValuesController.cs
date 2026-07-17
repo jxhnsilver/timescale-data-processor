@@ -15,8 +15,19 @@ namespace TimescaleDataProcessor.Api.Controllers
             _valuesService = valuesService;
         }
 
+        /// <summary>
+        /// Импортирует файл со значениями в базу данных
+        /// </summary>
+        /// <remarks>
+        /// Поддерживаемые форматы: CSV
+        /// </remarks>
+        /// <param name="file">Файл с данными для импорта</param>
+        /// <param name="ct">Токен отмены операции</param>
+        /// <returns>Сообщение об успешном импорте или ошибке</returns>
         [HttpPost]
         [Route("api/values/import")]
+        [ProducesResponseType(StatusCodes.Status200OK, Description = "Данные из файла успешно импортированы")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Description = "Ошибка импорта значений файла")]
         public async Task<IActionResult> ImportAsync(IFormFile file, CancellationToken ct)
         {
             try
@@ -32,8 +43,14 @@ namespace TimescaleDataProcessor.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Возвращает последние 10 значений, отсортированных по дате начала операции и имени файла
+        /// </summary>
+        /// <param name="ct">Токен отмены операции</param>
+        /// <returns>Список последних 10 значений</returns>
         [HttpGet]
         [Route("api/values/latest")]
+        [ProducesResponseType(StatusCodes.Status200OK, Description = "Список последних 10 значений успешно получен")]
         public async Task<IActionResult> GetLatestAsync(CancellationToken ct)
         {
             return Ok(await _valuesService.GetLatestValuesAsync(ct));
