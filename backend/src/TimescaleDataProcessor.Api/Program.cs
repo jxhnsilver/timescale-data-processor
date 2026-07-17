@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TimescaleDataProcessor.Api.Data.Context;
 using TimescaleDataProcessor.Api.Parsers;
+using TimescaleDataProcessor.Api.Services;
 using TimescaleDataProcessor.Api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddSingleton<IParserFactory, ParserFactory>();
 builder.Services.AddTransient<CsvParser>();
+builder.Services.AddTransient<IResultCalculator, ResultCalculator>();
 builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 var app = builder.Build();
 
