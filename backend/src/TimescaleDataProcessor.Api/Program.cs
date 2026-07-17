@@ -17,6 +17,7 @@ builder.Services.AddScoped<ITimescaleDataImportService, TimescaleDataImportServi
 builder.Services.AddTransient<IResultCalculator, ResultCalculator>();
 builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 builder.Services.AddScoped<IResultsService, ResultsService>();
+builder.Services.AddScoped<IValuesService, ValuesService>();
 
 builder.Services.AddControllers();
 
