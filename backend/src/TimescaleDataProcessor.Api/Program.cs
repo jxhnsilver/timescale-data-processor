@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddSingleton<IParserFactory, ParserFactory>();
 builder.Services.AddTransient<CsvParser>();
+
+builder.Services.AddScoped<ITimescaleDataImportService, TimescaleDataImportService>();
 builder.Services.AddTransient<IResultCalculator, ResultCalculator>();
 builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 var app = builder.Build();
