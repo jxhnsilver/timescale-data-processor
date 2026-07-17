@@ -4,6 +4,6 @@ namespace TimescaleDataProcessor.Api.Services
 {
     public interface IResultsService
     {
-        Task<IReadOnlyList<ResultDto>> GetFilteredResultsAsync(ResultsFilterDto filter);
+        Task<IReadOnlyList<ResultDto>> GetFilteredResultsAsync(ResultsFilterDto filter, CancellationToken ct);
     }
 }

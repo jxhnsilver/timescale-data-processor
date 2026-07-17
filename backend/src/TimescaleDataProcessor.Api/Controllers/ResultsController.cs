@@ -16,9 +16,9 @@ namespace TimescaleDataProcessor.Api.Controllers
 
         [HttpGet]
         [Route("api/results")]
-        public async Task<IActionResult> GetAsync([FromQuery] ResultsFilterDto filter)
+        public async Task<IActionResult> GetAsync([FromQuery] ResultsFilterDto filter, CancellationToken ct)
         {
-            return Ok(await _service.GetFilteredResultsAsync(filter));
+            return Ok(await _service.GetFilteredResultsAsync(filter, ct));
         }
     }
 }

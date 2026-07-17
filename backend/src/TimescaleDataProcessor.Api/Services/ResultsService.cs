@@ -13,7 +13,7 @@ namespace TimescaleDataProcessor.Api.Services
         {
             _dbContext = dbContext;
         }
-        public async Task<IReadOnlyList<ResultDto>> GetFilteredResultsAsync(ResultsFilterDto filter)
+        public async Task<IReadOnlyList<ResultDto>> GetFilteredResultsAsync(ResultsFilterDto filter, CancellationToken ct)
         {
             var query = _dbContext.Results.AsQueryable();
 
@@ -38,7 +38,7 @@ namespace TimescaleDataProcessor.Api.Services
             if (filter.AvgExecutionTimeTo is not null)
                 query = query.Where(r => r.AvgExecutionTime <= filter.AvgExecutionTimeTo);
 
-            var results = await query.ToListAsync();
+            var results = await query.ToListAsync(ct);
 
             return results.Select(MapToDto).ToList();
         }
