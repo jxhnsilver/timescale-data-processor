@@ -16,6 +16,7 @@ builder.Services.AddTransient<CsvParser>();
 builder.Services.AddScoped<ITimescaleDataImportService, TimescaleDataImportService>();
 builder.Services.AddTransient<IResultCalculator, ResultCalculator>();
 builder.Services.AddTransient<IRecordValidator, RecordValidator>();
+builder.Services.AddScoped<IResultsService, ResultsService>();
 
 builder.Services.AddControllers();
 
