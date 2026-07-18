@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TimescaleDataProcessor.Api.Dtos;
 using TimescaleDataProcessor.Api.Services;
 
 namespace TimescaleDataProcessor.Api.Controllers
@@ -50,7 +51,7 @@ namespace TimescaleDataProcessor.Api.Controllers
         /// <returns>Список последних 10 значений</returns>
         [HttpGet]
         [Route("api/values/latest")]
-        [ProducesResponseType(StatusCodes.Status200OK, Description = "Список последних 10 значений успешно получен")]
+        [ProducesResponseType(typeof(IReadOnlyList<ValueRecordDto>), StatusCodes.Status200OK, Description = "Список последних 10 значений успешно получен")]
         public async Task<IActionResult> GetLatestAsync(CancellationToken ct)
         {
             return Ok(await _valuesService.GetLatestValuesAsync(ct));

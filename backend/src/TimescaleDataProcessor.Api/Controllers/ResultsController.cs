@@ -22,7 +22,7 @@ namespace TimescaleDataProcessor.Api.Controllers
         /// <returns>Возвращает список отфильтрованных результатов</returns>
         [HttpGet]
         [Route("api/results")]
-        [ProducesResponseType(StatusCodes.Status200OK, Description = "Список отфильтрованных результатов успешно получен")]
+        [ProducesResponseType(typeof(IReadOnlyList<ResultDto>), StatusCodes.Status200OK, Description = "Список отфильтрованных результатов успешно получен")]
         public async Task<IActionResult> GetAsync([FromQuery] ResultsFilterDto filter, CancellationToken ct)
         {
             return Ok(await _service.GetFilteredResultsAsync(filter, ct));
