@@ -28,20 +28,14 @@ namespace TimescaleDataProcessor.Api.Controllers
         [HttpPost]
         [Route("api/values/import")]
         [ProducesResponseType(StatusCodes.Status200OK, Description = "Данные из файла успешно импортированы")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Description = "Ошибка импорта значений файла")]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest, Description = "Ошибка формата или структуры файла")]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity, Description = "Нарушение бизнес-правил при обработке данных")]
         public async Task<IActionResult> ImportAsync(IFormFile file, CancellationToken ct)
         {
-            try
-            {
-                await using var stream = file.OpenReadStream();
-                await _importService.ProcessAsync(stream, file.FileName, ct);
+            await using var stream = file.OpenReadStream();
+            await _importService.ProcessAsync(stream, file.FileName, ct);
 
-                return Ok("Значения успешно импортированы");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Ошибка при импорте значений: {ex.Message}");
-            }
+            return Ok("Значения успешно импортированы");
         }
 
         /// <summary>
