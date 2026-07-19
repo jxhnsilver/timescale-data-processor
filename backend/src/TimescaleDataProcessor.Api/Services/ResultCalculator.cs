@@ -1,4 +1,5 @@
 ﻿using TimescaleDataProcessor.Api.Entities;
+using TimescaleDataProcessor.Api.Exceptions;
 
 namespace TimescaleDataProcessor.Api.Services
 {
@@ -12,7 +13,7 @@ namespace TimescaleDataProcessor.Api.Services
             List<double> indicators)
         {
             if (indicators.Count == 0)
-                throw new ArgumentException("Нет записей для вычисления интегрального результата");
+                throw new BusinessRuleViolationException("Нет записей для вычисления интегрального результата");
 
             var timeDeltaInSeconds = (maxStartTime - minStartTime).TotalSeconds;
             var avgExecutionTime = sumExecutionTime / indicators.Count;
