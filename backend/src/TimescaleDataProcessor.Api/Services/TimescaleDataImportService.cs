@@ -38,7 +38,7 @@ namespace TimescaleDataProcessor.Api.Services
             var minStartTime = DateTime.MaxValue;
             var maxStartTime = DateTime.MinValue;
 
-            var batch = new List<ValueRecord>(MaxAllowedRows);
+            var batch = new List<ValueRecord>(BatchSize);
             var totalRows = 0;
 
             using var transaction = await _dbContext.Database.BeginTransactionAsync(ct);
@@ -73,7 +73,7 @@ namespace TimescaleDataProcessor.Api.Services
                         Indicator = parsedRecord.Value
                     });
 
-                    if (batch.Count >= BatchSize)
+                    if (batch.Count == BatchSize)
                     {
                         _dbContext.Values.AddRange(batch);
                         await _dbContext.SaveChangesAsync(ct);
