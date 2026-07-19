@@ -28,7 +28,7 @@ namespace TimescaleDataProcessor.Api.Services
                 var value1 = indicators[indicators.Count / 2];
                 var value2 = indicators[indicators.Count / 2 - 1];
 
-                medianIndicator = (value1 + value1) / 2.0;
+                medianIndicator = (value1 + value2) / 2.0;
             }
             else medianIndicator = indicators[indicators.Count / 2];
 
