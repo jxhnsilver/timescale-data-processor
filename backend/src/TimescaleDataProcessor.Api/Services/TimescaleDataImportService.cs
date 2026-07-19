@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimescaleDataProcessor.Api.Data.Context;
 using TimescaleDataProcessor.Api.Entities;
+using TimescaleDataProcessor.Api.Exceptions;
 using TimescaleDataProcessor.Api.Parsers;
 using TimescaleDataProcessor.Api.Validators;
 
@@ -56,7 +57,7 @@ namespace TimescaleDataProcessor.Api.Services
                 {
                     totalRows++;
                     if (totalRows > MaxAllowedRows)
-                        throw new InvalidOperationException($"Файл превышает лимит записей ({MaxAllowedRows})");
+                        throw new BusinessRuleViolationException($"Файл превышает лимит записей ({MaxAllowedRows})");
 
                     _validator.Validate(parsedRecord);
 
@@ -82,7 +83,7 @@ namespace TimescaleDataProcessor.Api.Services
                 }
 
                 if (totalRows < MinAllowedRows)
-                    throw new InvalidOperationException($"Файл содержит недостаточно записей. Минимум: {MinAllowedRows}");
+                    throw new BusinessRuleViolationException($"Файл содержит недостаточно записей. Минимум: {MinAllowedRows}");
 
                 if (batch.Count > 0)
                 {

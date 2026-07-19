@@ -1,4 +1,5 @@
 ﻿using TimescaleDataProcessor.Api.Dtos;
+using TimescaleDataProcessor.Api.Exceptions;
 
 namespace TimescaleDataProcessor.Api.Validators
 {
@@ -11,16 +12,16 @@ namespace TimescaleDataProcessor.Api.Validators
             var now = DateTime.UtcNow;
 
             if (record.Date > now)
-                throw new ArgumentException($"Дата записи {record.Date} позже текущего времени");
+                throw new BusinessRuleViolationException($"Дата записи {record.Date} позже текущего времени");
 
             if (DateOnly.FromDateTime(record.Date) < MinAllowedDate)
-                throw new ArgumentException($"Дата записи {record.Date.Date} раньше минимально допустимой даты {MinAllowedDate}");
+                throw new BusinessRuleViolationException($"Дата записи {record.Date.Date} раньше минимально допустимой даты {MinAllowedDate}");
 
             if (record.ExecutionTime < 0)
-                throw new ArgumentException("Время выполнения не может быть меньше 0");
+                throw new BusinessRuleViolationException("Время выполнения не может быть меньше 0");
 
             if (record.Value < 0)
-                throw new ArgumentException("Значение показателя не может быть меньше 0");
+                throw new BusinessRuleViolationException("Значение показателя не может быть меньше 0");
         }
     }
 }

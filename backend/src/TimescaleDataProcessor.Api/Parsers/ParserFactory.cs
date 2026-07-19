@@ -1,4 +1,6 @@
-﻿namespace TimescaleDataProcessor.Api.Parsers
+﻿using TimescaleDataProcessor.Api.Exceptions;
+
+namespace TimescaleDataProcessor.Api.Parsers
 {
     public class ParserFactory : IParserFactory
     {
@@ -17,7 +19,7 @@
             return fileExtension switch
             {
                 ".csv" => _serviceProvider.GetRequiredService<CsvParser>(),
-                _ => throw new NotSupportedException($"Формат файла '{fileExtension}' не поддерживается")
+                _ => throw new FileFormatException($"Формат файла '{fileExtension}' не поддерживается")
             };
         }
     }
