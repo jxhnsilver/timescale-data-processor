@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using System.Reflection;
 using TimescaleDataProcessor.Api.Data.Context;
+using TimescaleDataProcessor.Api.Middleware;
 using TimescaleDataProcessor.Api.Parsers;
 using TimescaleDataProcessor.Api.Services;
 using TimescaleDataProcessor.Api.Validators;
@@ -42,7 +43,14 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+builder.Logging.AddConsole();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 using (var scope = app.Services.CreateScope())
 {
