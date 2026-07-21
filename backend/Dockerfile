@@ -3,9 +3,11 @@ WORKDIR /source
 
 COPY *.slnx .
 COPY src/TimescaleDataProcessor.Api/*.csproj ./src/TimescaleDataProcessor.Api/
+COPY tests/*.csproj ./tests/
 RUN dotnet restore
 
 COPY src/ ./src/
+COPY tests/ ./tests/
 WORKDIR ./src/TimescaleDataProcessor.Api
 RUN dotnet publish -c Release -o /app --no-restore
 
