@@ -1,0 +1,33 @@
+<div>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="margin: 0;">Последние записи значений</h2>
+    <button (click)="fetchValues()">Получить значения</button>
+  </div>
+
+  @if (values().length > 0) {
+    <table border="1" cellpadding="8" style="text-align: center; width: 100%;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Имя файла</th>
+          <th>Время начала операции</th>
+          <th>Время выполнения операции (сек)</th>
+          <th>Показатель</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of values(); track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.fileName }}</td>
+            <td>{{ item.startTime | date:'dd.MM.yyyy HH:mm:ss.SS' }}</td>
+            <td>{{ item.executionTime}}</td>
+            <td>{{ item.indicator }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <p>Данные отсутствуют. Нажмите кнопку для загрузки.</p>
+  }
+</div>
