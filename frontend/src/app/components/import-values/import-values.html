@@ -1,0 +1,28 @@
+<div>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="margin: 0;">Импорт значений</h2>
+    <div>
+      <input 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        accept=".csv" 
+        [disabled]="isLoading()"
+        style="margin-right: 10px;"
+      />
+      <button 
+        (click)="uploadFile()" 
+        [disabled]="isLoading() || !selectedFile()"
+      >
+        Импортировать
+      </button>
+    </div>
+  </div>
+
+  @if (successMessage()) {
+    <p style="color: green;">{{ successMessage() }}</p>
+  }
+
+  @if (errorMessage()) {
+    <p style="color: red;">{{ errorMessage() }}</p>
+  }
+</div>
