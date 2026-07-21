@@ -22,6 +22,8 @@ builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 builder.Services.AddScoped<IResultsService, ResultsService>();
 builder.Services.AddScoped<IValuesService, ValuesService>();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -68,5 +70,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+app.MapHealthChecks("/api/health");
 
 app.Run();
