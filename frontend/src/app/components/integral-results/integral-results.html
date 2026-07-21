@@ -4,6 +4,50 @@
     <button (click)="fetchResults()">Получить результаты</button>
   </div>
 
+  <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
+    <input 
+      type="text" 
+      [(ngModel)]="filter.fileName" 
+      placeholder="Имя файла" 
+    />
+    <input 
+      type="datetime-local" 
+      [(ngModel)]="filter.startTimeFrom" 
+      placeholder="Дата от"
+    />
+    <input 
+      type="datetime-local" 
+      [(ngModel)]="filter.startTimeTo" 
+      placeholder="Дата до"
+    />
+    <input 
+      type="number" 
+      [(ngModel)]="filter.avgIndicatorFrom" 
+      placeholder="Ср. показатель от"
+      step="0.01"
+    />
+    <input 
+      type="number" 
+      [(ngModel)]="filter.avgIndicatorTo" 
+      placeholder="Ср. показатель до"
+      step="0.01"
+    />
+    <input 
+      type="number" 
+      [(ngModel)]="filter.avgExecutionTimeFrom" 
+      placeholder="Ср. время от"
+      step="0.01"
+    />
+    <input 
+      type="number" 
+      [(ngModel)]="filter.avgExecutionTimeTo" 
+      placeholder="Ср. время до"
+      step="0.01"
+    />
+    <button (click)="fetchResults()">Применить</button>
+    <button (click)="resetFilters()">Сбросить</button>
+  </div>
+
   @if (results().length > 0) {
     <table border="1" cellpadding="8" style="text-align: center; width: 100%;">
       <thead>
