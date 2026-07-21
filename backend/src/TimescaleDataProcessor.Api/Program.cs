@@ -21,6 +21,7 @@ builder.Services.AddTransient<IResultCalculator, ResultCalculator>();
 builder.Services.AddTransient<IRecordValidator, RecordValidator>();
 builder.Services.AddScoped<IResultsService, ResultsService>();
 builder.Services.AddScoped<IValuesService, ValuesService>();
+builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
 builder.Services.AddHealthChecks();
 

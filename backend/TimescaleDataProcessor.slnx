@@ -5,4 +5,7 @@
   <Folder Name="/src/">
     <Project Path="src/TimescaleDataProcessor.Api/TimescaleDataProcessor.Api.csproj" Id="1216b627-f9f0-4d88-bb67-e8cb16be7611" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TimescaleDataProcessor.UnitTests.csproj" />
+  </Folder>
 </Solution>
