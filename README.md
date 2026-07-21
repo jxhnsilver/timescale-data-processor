@@ -12,16 +12,20 @@
 - **API Documentation**: `Swagger`
 
 ## Запуск
-1. **Docker Desktop** (Windows/macOS) или **Docker Engine & Docker Compose** (Linux) должен бысть установлен и запущен.
-2. Скопируйте файл конфигурации окружения с тестовыми данными:
+1. Склонируйте репозиторий и перейдите в корневую директорию:
+   ```bash
+   git clone https://github.com/jxhnsilver/timescale-data-processor.git
+   ```
+3. **Docker Desktop** (Windows/macOS) или **Docker Engine & Docker Compose** (Linux) должен бысть установлен и запущен.
+4. Скопируйте файл конфигурации окружения с тестовыми данными:
    ```bash
    cp .env.example .env
    ```
-3. Соберите образы и запустите все сервисы из корневой директории:
+5. Соберите образы и запустите все сервисы из корневой директории:
    ```bash
    docker compose up --build
    ```
-4. Откройте интерфейсы:
+6. Откройте интерфейсы:
    - Client (SPA): http://localhost:80
    - API (Swagger): http://localhost:8080/swagger
   
