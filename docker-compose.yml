@@ -20,8 +20,21 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     depends_on:
       postgres:
+        condition: service_healthy
+  
+  client:
+    build: ./frontend
+    ports:
+     - "80:80"
+    depends_on:
+      api:
         condition: service_healthy
 
 volumes:
