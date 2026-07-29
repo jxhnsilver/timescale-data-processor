@@ -32,11 +32,10 @@ services:
   client:
     build: ./frontend
     ports:
-     - "80:80"
+      - "80:80"
     depends_on:
       api:
         condition: service_healthy
 
 volumes:
   pgdata:
-  

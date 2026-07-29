@@ -3,7 +3,7 @@ WORKDIR /source
 
 COPY *.slnx .
 COPY src/TimescaleDataProcessor.Api/*.csproj ./src/TimescaleDataProcessor.Api/
-COPY tests/*.csproj ./tests/
+COPY tests/TimescaleDataProcessor.UnitTests/*.csproj ./tests/TimescaleDataProcessor.UnitTests/
 RUN dotnet restore
 
 COPY src/ ./src/

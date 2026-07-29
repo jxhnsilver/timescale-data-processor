@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\TimescaleDataProcessor.Api\TimescaleDataProcessor.Api.csproj" />
+    <ProjectReference Include="..\..\src\TimescaleDataProcessor.Api\TimescaleDataProcessor.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
